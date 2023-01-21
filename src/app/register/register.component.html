@@ -1,0 +1,134 @@
+<section>
+  <div class="container d-flex justify-content-center align-items-center position-relative">
+    <div class="box position-relative">
+      <div class="square" style="--i:0;"></div>
+      <div class="square" style="--i:1;"></div>
+      <div class="square" style="--i:2;"></div>
+      <div class="square" style="--i:3;"></div>
+      <div class="square" style="--i:4;"></div>
+      <div class="square" style="--i:5;"></div>
+
+
+      <div class="form">
+        <h2 class="text-center pt-4 reg">Register</h2>
+        <form action="" class="pt-4" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">First Name</label>
+              <div class="inputBx">
+                <input class="form-control" type="text" name="firstName" #firstName="ngModel"
+                  [(ngModel)]="model.firstName" minlength="10"
+                  [class.is-valid]="firstName.valid && (firstName.dirty || firstName.touched)" required
+                  autocomplete="off">
+
+              </div>
+              <div class="form-control-feedback" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+                <p class="text-danger" *ngIf="firstName.errors['required']">Firstname is required</p>
+                <p class="text-danger" *ngIf="firstName.errors['minlength']">Firstname at least 8 characters</p>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">Last Name</label>
+              <div class="inputBx">
+                <input class="form-control" type="text" name="lastName" #lastName="ngModel" [(ngModel)]="model.lastName"
+                  minlength="10" [class.is-valid]="lastName.valid && (lastName.dirty || lastName.touched)" required
+                  autocomplete="off">
+
+              </div>
+              <div class="form-control-feedback" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+                <p class="text-danger" *ngIf="lastName.errors['required']">Lastname is required</p>
+                <p class="text-danger" *ngIf="lastName.errors['minlength']">Lastname at least 8 characters</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">Email Address</label>
+              <div class="inputBx">
+                <input class="form-control" type="email" name="email" #email="ngModel" [(ngModel)]="model.email"
+                  pattern="[^ @]*@[^ @]*" [class.is-valid]="email.valid && (email.dirty || email.touched)"
+                  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required autocomplete="off">
+                <div class="form-control-feedback " *ngIf="email.errors && (email.dirty || email.touched)">
+                  <p class="text-danger" *ngIf="email.errors['required']">Email is required</p>
+                  <p class="text-danger" *ngIf="email.errors['pattern']">
+                    Enter a valid Email
+                  </p>
+                </div>
+                <i class="fas fa-user-circle"></i>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">Phone Number</label>
+              <div class="inputBx">
+                <input class="form-control" type="number" name="mobile" #mobile="ngModel" [(ngModel)]="model.mobile"
+                  [class.is-valid]="mobile.valid && (mobile.dirty || mobile.touched)" autocomplete="off"
+                  pattern="^((\\+91-?)|0)?[0-9]{10}$" required autocomplete="off">
+                <div class="form-control-feedback " *ngIf="mobile.errors && (mobile.dirty || mobile.touched)">
+                  <p class="text-danger" *ngIf="mobile.errors['required']">PhoneNumber is required</p>
+                  <p class="text-danger" *ngIf="mobile.errors['pattern']">
+                    Enter a valid PhoneNumber
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">Password</label>
+              <div class="inputBx password">
+                <input type="password" name="password" class="form-control" name="password" #password="ngModel"
+                  [(ngModel)]="model.password" minlength="8"
+                  [class.is-valid]="password.valid && (password.dirty || password.touched)" required>
+                <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                  <p class="text-danger" *ngIf="password.errors['required']">Password is required</p>
+                  <p class="text-danger" *ngIf="password.errors['minlength']">
+                    Password must be at least 8 characters long
+                  </p>
+                </div>
+                <i class="fas fa-key"></i>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-6 col-md-6 ">
+              <label class="text-white">Confirm Password</label>
+              <div class="inputBx password">
+                <input type="password" name="confirm" class="form-control" name="confirm" #confirm="ngModel"
+                  [(ngModel)]="model.confirm" minlength="8"
+                  [class.is-valid]="confirm.valid && (confirm.dirty || confirm.touched)" required>
+                <div class="form-control-feedback" *ngIf="confirm.errors && (confirm.dirty || confirm.touched)">
+                  <p class="text-danger" *ngIf="confirm.errors['required']">Confirm Password is required</p>
+                  <!-- <p class="text-danger" *ngIf="confirm.errors['minlength']">
+                    Confirm Password must be at least 8 characters long
+                  </p> -->
+                  <p *ngIf="confirm.errors['matching']">
+                    Confirm Password does not match
+                  </p>
+                </div>
+                <i class="fas fa-key"></i>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="pb-4">You have an account?&nbsp;&nbsp;<a href="" class="text-decoration-none ">Sign in</a>
+            </p>
+          </div>
+
+          <div class="inputBx text-center">
+            <input type="submit" class="btn fs-5 fw-semibold" [disabled]="f.invalid" value="Register" disabled>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>
